@@ -74,7 +74,7 @@ as.inputoutput <- function(Z, RS_label,
 
   # Value added -- could be a matrix or a vector
   if(!missing(V)){
-    if(class(V) != 'matrix'){X = as.matrix(V)}
+    if(class(V) != 'matrix'){V = as.matrix(V)}
     if( is.null(dim(V)) ){
       if(length(V) != length(X)) stop("Row dimension of V and Z must match")
       io$V <- matrix(V, nrow = 1)
@@ -150,7 +150,7 @@ as.inputoutput <- function(Z, RS_label,
   # Technical input Coefficient Matrix
   if(missing(A)){
     xhat <- diag(c(1/X))
-    io$A <- Z %*% xhat
+    io$A <- io$Z %*% xhat
   } else {
     if(class(A) != 'matrix'){A = as.matrix(A)}
     io$A <- A
@@ -160,7 +160,7 @@ as.inputoutput <- function(Z, RS_label,
   # Technical Output Coefficient Matrix
   if(missing(B)){
     xhat <- diag(c(1/X))
-    io$B <- xhat %*% Z
+    io$B <- xhat %*% io$Z
   } else {
     if(class(B) != 'matrix'){B = as.matrix(B)}
     io$B <- B
