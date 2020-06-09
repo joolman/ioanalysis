@@ -94,10 +94,9 @@ agg.region <- function(io, regions, newname = "newname"){
     IO$fV <- io$fV
     IO$fV_label <- io$fV_label
   }
-  xhat <- matrix(1/IO$X, ncol = n, nrow = n)
-  IO$A <- IO$Z * xhat
-  xhat <- matrix(1/IO$X, ncol = n, nrow = n, byrow = TRUE)
-  IO$B <- IO$Z * xhat
+  xhat <- diag(C(1/IO$x))
+  IO$A <- IO$Z %*% xhat
+  IO$B <- xhat %*% IO$Z
   IO$L <- leontief.inv(A = IO$A)
   IO$G <- ghosh.inv(B = IO$B)
   class(IO) <- "InputOutput"

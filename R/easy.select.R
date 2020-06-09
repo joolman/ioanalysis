@@ -18,7 +18,7 @@ easy.select <- function(io){
     if(userInput == "y"){
       n <- length(mm)
       for(i in 1:n){
-        cat(paste("\nSector ", RS_label[mm[[i]][[1]], 2], 
+        cat(paste("\nSector ", RS_label[mm[[i]][[1]][1], 2], 
                   " is in region(s) ", mm[[i]][[2]], 
                   " and not in region(s) ", mm[[i]][[3]], sep = ""))
       }
