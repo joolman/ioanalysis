@@ -96,14 +96,18 @@ extraction <- function(io, ES = NULL, regions = 1, sectors = 1, type = "backward
         if(duration >= 0.1){
           print(paste("Calculating inverse. Should take roughtly", duration, "minutes."))
         }
-        BL <- X - solve(I - Arr) %*% f
-        rownames(BL) <- paste(RS_label[, 1], RS_label[, 2], sep = ".")
-        if(normalize == TRUE){
+        if (normalize == TRUE) {   #modified here
+        if (aggregate == FALSE){
           BL <- BL/X
+        }else{
+          BL <- (one %*% BL)  / (one %*% X)
         }
-        if(aggregate == TRUE){
+      }else{
+        if (aggregate == TRUE){
           BL <- one %*% BL
         }
+      }
+
         colnames(BL) <- sector
         l <- l + 1
         link[[l]] <- BL
@@ -120,12 +124,18 @@ extraction <- function(io, ES = NULL, regions = 1, sectors = 1, type = "backward
         }
         FL <- X - t(V %*% solve(I - Brr))
         rownames(FL) <- paste(RS_label[, 1], RS_label[, 2], sep = ".")
-        if(normalize == TRUE){
+      if (normalize == TRUE) {  #modified here
+        if (aggregate == FALSE){
           FL <- FL/X
+        }else{
+          FL <- (one %*% FL)  / (one %*% X)
         }
-        if(aggregate == TRUE){
+      }else{
+        if (aggregate == TRUE){
           FL <- one %*% FL
         }
+      }
+
         colnames(FL) <- sector
         l <- l + 1
         link[[l]] <- FL
@@ -143,12 +153,18 @@ extraction <- function(io, ES = NULL, regions = 1, sectors = 1, type = "backward
         }
         BL <- X - solve(I - Arr) %*% f
         rownames(BL) <- paste(RS_label[, 1], RS_label[, 2], sep = ".")
-        if(normalize == TRUE){
+       if (normalize == TRUE) { #modified here
+        if (aggregate == FALSE){
           BL <- BL/X
+        }else{
+          BL <- (one %*% BL)  / (one %*% X)
         }
-        if(aggregate == TRUE){
+      }else{
+        if (aggregate == TRUE){
           BL <- one %*% BL
         }
+      }
+
         colnames(BL) <- sector
         l <- l + 1
         link[[l]] <- BL
@@ -166,12 +182,19 @@ extraction <- function(io, ES = NULL, regions = 1, sectors = 1, type = "backward
         }
         FL <- X - t(V %*% solve(I - Brr))
         rownames(FL) <- paste(RS_label[, 1], RS_label[, 2], sep = ".")
-        if(normalize == TRUE){
+        
+      if (normalize == TRUE) { #modified here
+        if (aggregate == FALSE){
           FL <- FL/X
+        }else{
+          FL <- (one %*% FL)  / (one %*% X)
         }
-        if(aggregate == TRUE){
+      }else{
+        if (aggregate == TRUE){
           FL <- one %*% FL
         }
+      }
+
         colnames(FL) <- sector
         l <- l + 1
         link[[l]] <- FL
@@ -211,12 +234,19 @@ extraction <- function(io, ES = NULL, regions = 1, sectors = 1, type = "backward
       }
       BL <- X - solve(I - Arr) %*% f
       rownames(BL) <- paste(RS_label[, 1], RS_label[, 2], sep = ".")
-      if(normalize == TRUE){
-        BL <- BL/X
+      
+      if (normalize == TRUE) {   #modified here
+        if (aggregate == FALSE){
+          BL <- BL/X
+        }else{
+          BL <- (one %*% BL)  / (one %*% X)
+        }
+      }else{
+        if (aggregate == TRUE){
+          BL <- one %*% BL
+        }
       }
-      if(aggregate == TRUE){
-        BL <- one %*% BL
-      }
+
       colnames(BL) <- "backward"
       ext <- cbind(ext, BL)
     }
@@ -232,12 +262,18 @@ extraction <- function(io, ES = NULL, regions = 1, sectors = 1, type = "backward
       }
       FL <- X - t(V %*% solve(I - Brr))
       rownames(FL) <- paste(RS_label[, 1], RS_label[, 2], sep = ".")
-      if(normalize == TRUE){
-        FL <- FL/X
+      if (normalize == TRUE) {  #modified here
+        if (aggregate == FALSE){
+          FL <- FL/X
+        }else{
+          FL <- (one %*% FL)  / (one %*% X)
+        }
+      }else{
+        if (aggregate == TRUE){
+          FL <- one %*% FL
+        }
       }
-      if(aggregate == TRUE){
-        FL <- one %*% FL
-      }
+
       colnames(FL) <- "forward"
       ext <- cbind(ext, FL)
     }
@@ -254,12 +290,18 @@ extraction <- function(io, ES = NULL, regions = 1, sectors = 1, type = "backward
       }
       BL <- X - solve(I - Arr) %*% f
       rownames(BL) <- paste(RS_label[, 1], RS_label[, 2], sep = ".")
-      if(normalize == TRUE){
-        BL <- BL/X
+      if (normalize == TRUE) { #modified here
+        if (aggregate == FALSE){
+          BL <- BL/X
+        }else{
+          BL <- (one %*% BL)  / (one %*% X)
+        }
+      }else{
+        if (aggregate == TRUE){
+          BL <- one %*% BL
+        }
       }
-      if(aggregate == TRUE){
-        BL <- one %*% BL
-      }
+
       colnames(BL) <- "backward.total"
       ext <- cbind(ext, BL)
     }
@@ -276,12 +318,18 @@ extraction <- function(io, ES = NULL, regions = 1, sectors = 1, type = "backward
       }
       FL <- X - t(V %*% solve(I - Brr))
       rownames(FL) <- paste(RS_label[, 1], RS_label[, 2], sep = ".")
-      if(normalize == TRUE){
-        FL <- FL/X
+      if (normalize == TRUE) {  #modified here
+        if (aggregate == FALSE){
+          FL <- FL/X
+        }else{
+          FL <- (one %*% FL)  / (one %*% X)
+        }
+      }else{
+        if (aggregate == TRUE){
+          FL <- one %*% FL
+        }
       }
-      if(aggregate == TRUE){
-        FL <- one %*% FL
-      }
+
       colnames(FL) <- "forward.total"
       ext <- cbind(ext, FL)
     }
