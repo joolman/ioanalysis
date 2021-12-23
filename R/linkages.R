@@ -59,8 +59,8 @@ linkages <- function(io, ES = NULL, regions = "all", sectors = "all", type = c("
         BL.dir <- t(  n * (t(one) %*% A) / as.numeric(t(one) %*% A %*% one)  )
         FL.dir <-     n * (   B %*% one) / as.numeric(t(one) %*% B %*% one)
       } else if(normalize == FALSE){
-        BL.dir <- t(  (t(one) %*% L)  )
-        FL.dir <-     (   G %*% one)
+        BL.dir <- t(  (t(one) %*% A)  )    #L replaced by A (direct effect not total)
+        FL.dir <-     (   B %*% one)       #G replaced by B
       }
       link.dir <- cbind(BL.dir, FL.dir)
       colnames(link.dir) <- c("BL.dir", "FL.dir")
